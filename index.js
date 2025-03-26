@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const { Client: PgClient } = require('pg');
+require('dotenv').config();
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -15,8 +16,8 @@ const database_client = new PgClient({
   database: 'winsdb',     // Change to your DB name
   port: 5432,
 });
+
 database_client.connect();
-const TOKEN = 'MTM1NDE3MTY4ODA4NjE0NzIxMg.GHqy47.gdGoVzaxjtCkIkmvhfYZd66ulqki2NPj7uC80M';
 const EMOJI = '🤓'; // Change to any emoji you want
 
 client.on('ready', () => {
@@ -143,4 +144,4 @@ client.on('messageCreate', async (message) => {
 
   }
 });
-client.login(TOKEN);
+client.login(process.env.DISCORD_TOKEN);
