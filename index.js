@@ -135,19 +135,16 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
   // Command: !mention username
   if (!message.content.startsWith('!mention')) {
-    const args = message.content.split(' ');
     // const username = args.join(' '); 
 
     // Fetch all members (if not cached)
     await message.guild.members.fetch();
     // Find the user by username (not displayName or nickname)
-    for (const username of args){
-      const member = message.guild.members.cache.find(m => username.toLowerCase().includes(m.user.displayName.toLowerCase()));
+      const member = message.guild.members.cache.find(m => message.content.toLowerCase().includes(m.user.displayName.toLowerCase()));
 
       if (member) {
         message.channel.send(`<@${member.user.id}>`);
       }
-    }
 
   }
 });
