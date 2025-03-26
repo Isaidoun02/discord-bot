@@ -1,6 +1,13 @@
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const { Client: PgClient } = require('pg');
 require('dotenv').config();
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => res.send('Bot is alive!'));
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Web server running to keep Render alive');
+});
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
