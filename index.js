@@ -10,7 +10,7 @@ const client = new Client({
   ],
   partials: [Partials.Message, Partials.Channel, Partials.GuildMember]
 });
-const database_client = new Client({
+const database_client = new PgClient({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
