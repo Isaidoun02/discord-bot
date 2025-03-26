@@ -10,11 +10,11 @@ const client = new Client({
   ],
   partials: [Partials.Message, Partials.Channel, Partials.GuildMember]
 });
-const database_client = new PgClient({
-  user: 'isaidoun',
-  host: 'localhost',
-  database: 'winsdb',     // Change to your DB name
-  port: 5432,
+const database_client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 database_client.connect();
