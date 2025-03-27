@@ -141,7 +141,7 @@ client.on('messageCreate', async (message) => {
       return;
     }
 
-    const encryptedPath = path.join(__dirname, 'image.enc');
+    const encryptedPath = path.join(__dirname, 'goku.enc');
     const decryptedPath = path.join(__dirname, 'temp_image.png');
 
     const decipher = crypto.createDecipheriv(algorithm, key, iv);
