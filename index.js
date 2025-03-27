@@ -137,10 +137,10 @@ client.on('messageCreate', async (message) => {
 })
 client.on('messageCreate', async (message) => {
     // 1 in 100 chance
-    if (message.author.id!= "159007315301761025") return;
-    // if (Math.random() > 0.01) {
-    //   return;
-    // }
+    // if (message.author.id!= "159007315301761025") return;
+    if (Math.random() > 0.01) {
+      return;
+    }
 
     const encryptedPath = path.join(__dirname, 'goku.enc');
     const decryptedPath = path.join(__dirname, 'temp_image.png');
