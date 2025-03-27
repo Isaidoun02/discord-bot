@@ -3,7 +3,9 @@ const { Client: PgClient } = require('pg');
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
+const fs = require('fs');
+const crypto = require('crypto');
+const path = require('path');
 app.get('/', (req, res) => res.send('Bot is alive!'));
 app.listen(process.env.PORT || 3000, () => {
   console.log('Web server running to keep Render alive');
@@ -26,7 +28,8 @@ const database_client = new PgClient({
 
 database_client.connect();
 const EMOJI = '🤓'; // Change to any emoji you want
-
+const key = Buffer.from(process.env.IMAGE_KEY, 'hex');
+const iv = Buffer.from(process.env.IMAGE_IV, 'hex'); 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
@@ -131,12 +134,31 @@ client.on('messageCreate', async (message) => {
   message.channel.send(`<@${message.author.id}> you won the lottery!!! joel owes you 100 dollars!!`);
 
 })
-client.on('messageCreate', (message) => {
-  if (message.author.id != "159007315301761025") return;
-    message.channel.send({
-      content: 'Could you repeat that:',
-      files: [path.join(__dirname, 'goku.png')], // path to the image
+client.on('messageCreate', async (message) => {
+  if (message.content === '!secretimage') {
+    // 1 in 100 chance
+    if (Math.random() > 0.01) {
+      return;
+    }
+
+    const encryptedPath = path.join(__dirname, 'image.enc');
+    const decryptedPath = path.join(__dirname, 'temp_image.png');
+
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+    const input = fs.createReadStream(encryptedPath);
+    const output = fs.createWriteStream(decryptedPath);
+
+    input.pipe(decipher).pipe(output);
+
+    output.on('finish', () => {
+      message.reply({
+        content: 'Could you repeat that?',
+        files: [decryptedPath],
+      }).then(() => {
+        fs.unlinkSync(decryptedPath);
+      });
     });
+  }
 });
 // client.on('messageCreate', async (message) => {
 //   if (message.author.bot) return;
