@@ -10,10 +10,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "crypto": "^1.0.1",
     "discord.js": "^14.18.0",
     "dotenv": "^16.4.7",
     "env": "^0.0.2",
     "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "pg": "^8.14.1"
   }
 }
