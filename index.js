@@ -135,11 +135,11 @@ client.on('messageCreate', async (message) => {
 
 })
 client.on('messageCreate', async (message) => {
-  if (message.content === '!secretimage') {
     // 1 in 100 chance
-    if (Math.random() > 0.01) {
-      return;
-    }
+    if (message.author.id!= "159007315301761025") return;
+    // if (Math.random() > 0.01) {
+    //   return;
+    // }
 
     const encryptedPath = path.join(__dirname, 'goku.enc');
     const decryptedPath = path.join(__dirname, 'temp_image.png');
@@ -158,7 +158,6 @@ client.on('messageCreate', async (message) => {
         fs.unlinkSync(decryptedPath);
       });
     });
-  }
 });
 // client.on('messageCreate', async (message) => {
 //   if (message.author.bot) return;
