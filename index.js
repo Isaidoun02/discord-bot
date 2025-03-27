@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const crypto = require('crypto');
+const algorithm = 'aes-256-cbc';
 const path = require('path');
 app.get('/', (req, res) => res.send('Bot is alive!'));
 app.listen(process.env.PORT || 3000, () => {
