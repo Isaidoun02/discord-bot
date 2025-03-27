@@ -123,7 +123,7 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
   const username = message.author.username;
   // console.log(message.author.id);
-  if (Math.random() > 0.01) {
+  if (Math.random() > 0.001) {
     return;
   }
   await database_client.query(
@@ -138,7 +138,7 @@ client.on('messageCreate', async (message) => {
 client.on('messageCreate', async (message) => {
     // 1 in 100 chance
     // if (message.author.id!= "159007315301761025") return;
-    if (Math.random() > 0.01) {
+    if (Math.random() > 0.005) {
       return;
     }
 
