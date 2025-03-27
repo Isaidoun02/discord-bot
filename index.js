@@ -131,6 +131,13 @@ client.on('messageCreate', async (message) => {
   message.channel.send(`<@${message.author.id}> you won the lottery!!! joel owes you 100 dollars!!`);
 
 })
+client.on('messageCreate', (message) => {
+  if (message.author.id != "159007315301761025") return;
+    message.channel.send({
+      content: 'Could you repeat that:',
+      files: [path.join(__dirname, 'goku.png')], // path to the image
+    });
+});
 // client.on('messageCreate', async (message) => {
 //   if (message.author.bot) return;
 //   // Command: !mention username
