@@ -131,21 +131,21 @@ client.on('messageCreate', async (message) => {
   message.channel.send(`<@${message.author.id}> you won the lottery!!! joel owes you 100 dollars!!`);
 
 })
-client.on('messageCreate', async (message) => {
-  if (message.author.bot) return;
-  // Command: !mention username
-  if (!message.content.startsWith('!mention')) {
-    // const username = args.join(' '); 
+// client.on('messageCreate', async (message) => {
+//   if (message.author.bot) return;
+//   // Command: !mention username
+//   if (!message.content.startsWith('!mention')) {
+//     // const username = args.join(' '); 
 
-    // Fetch all members (if not cached)
-    await message.guild.members.fetch();
-    // Find the user by username (not displayName or nickname)
-      const member = message.guild.members.cache.find(m => message.content.toLowerCase().includes(m.user.displayName.toLowerCase()));
+//     // Fetch all members (if not cached)
+//     await message.guild.members.fetch();
+//     // Find the user by username (not displayName or nickname)
+//       const member = message.guild.members.cache.find(m => message.content.toLowerCase().includes(m.user.displayName.toLowerCase()));
 
-      if (member) {
-        message.channel.send(`<@${member.user.id}>`);
-      }
+//       if (member) {
+//         message.channel.send(`<@${member.user.id}>`);
+//       }
 
-  }
-});
+//   }
+// });
 client.login(process.env.DISCORD_TOKEN);
