@@ -102,10 +102,12 @@ client.on('messageCreate', async (message) => {
   }
   let emoji = EMOJI;
   if (message.author.id=="145163678516379648") {
-    emoji = joelemoji;
+    //joel
+    emoji = '🤓';
   }
   else if (message.author.id=="439436120363761685") {
-    emoji = ibzemoji;
+    //ibz
+    emoji = '🤓';
   }
   else if (message.author.id== "159007315301761025") {
     emoji = EMOJI;
