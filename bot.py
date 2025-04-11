@@ -101,19 +101,16 @@ async def on_message(message):
             await db.close()
 
     # Emoji reaction
-    elif random.random() < 0.2:
-        emoji = EMOJI
+    if random.random() < 0.2:
         if message.author.id == 145163678516379648:
-            emoji = "🤓"
+            emoji = discord.utils.get(message.guild.emojis, name='hoboel')
         elif message.author.id == 439436120363761685:
-            emoji = "🤓"
+            emoji = discord.utils.get(message.guild.emojis, name='goku')
         elif message.author.id == 159007315301761025:
             emoji = EMOJI
         elif message.author.id == 622915260759932948:
             kumoji = discord.utils.get(message.guild.emojis, name='kumar_stare')
             emoji = kumoji
-        else:
-            return
 
         try:
             await message.add_reaction(emoji)
@@ -121,7 +118,7 @@ async def on_message(message):
             print("Failed to react:", e)
 
     # Lottery win
-    elif random.random() < 0.001:
+    if random.random() < 0.001:
         try:
             await db.execute("""
                 INSERT INTO wins (username, wins)
@@ -138,7 +135,7 @@ async def on_message(message):
             await db.close()
 
     # Encrypted image
-    elif random.random() < 0.005:
+    if random.random() < 0.005:
         encrypted_path = "goku.enc"
         decrypted_path = "temp_image.png"
 
