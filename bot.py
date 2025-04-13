@@ -136,7 +136,7 @@ async def on_message(message):
             await db.close()
 
     # Encrypted image
-    if random.random() < 1:
+    if random.random() < 0.005:
         encrypted_path = "goku.enc"
         decrypted_path = "temp_image.png"
 
