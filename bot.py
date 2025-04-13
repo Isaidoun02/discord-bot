@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import base64
 from Crypto.Cipher import AES
 import shutil
+from Crypto.Util.Padding import unpad
 load_dotenv()
 
 intents = discord.Intents.default()
@@ -135,7 +136,7 @@ async def on_message(message):
             await db.close()
 
     # Encrypted image
-    if random.random() < 0.005:
+    if random.random() < 1:
         encrypted_path = "goku.enc"
         decrypted_path = "temp_image.png"
 
@@ -144,6 +145,7 @@ async def on_message(message):
                 ciphertext = f.read()
 
             decrypted = algorithm.decrypt(ciphertext)
+            decrypted = unpad(decrypted, AES.block_size)  # PKCS#7 unpadding
             with open(decrypted_path, "wb") as f:
                 f.write(decrypted)
 
