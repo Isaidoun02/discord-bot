@@ -26,7 +26,6 @@ EMOJI = '🤓'
 key = bytes.fromhex(os.getenv("IMAGE_KEY"))
 iv = bytes.fromhex(os.getenv("IMAGE_IV"))
 algorithm = AES.new(key, AES.MODE_CBC, iv)
-
 DATABASE_URL = os.getenv("DATABASE_URL")
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 print("Loaded DB URL:", DATABASE_URL)
@@ -116,7 +115,8 @@ async def on_message(message):
         try:
             await message.add_reaction(emoji)
         except Exception as e:
-            print("Failed to react:", e)
+            # print("Failed to react:", e)
+            pass
 
     # Lottery win
     if random.random() < 0.001:
@@ -136,7 +136,7 @@ async def on_message(message):
             await db.close()
 
     # Encrypted image
-    if random.random() < 0.005:
+    if message.author.id == 439436120363761685:
         encrypted_path = "goku.enc"
         decrypted_path = "temp_image.png"
 
@@ -144,12 +144,14 @@ async def on_message(message):
             with open(encrypted_path, "rb") as f:
                 ciphertext = f.read()
 
-            decrypted = algorithm.decrypt(ciphertext)
-            decrypted = unpad(decrypted, AES.block_size)  # PKCS#7 unpadding
+            algorithm = AES.new(key, AES.MODE_CBC, iv)
+            decrypted = unpad(algorithm.decrypt(ciphertext), AES.block_size)
             with open(decrypted_path, "wb") as f:
                 f.write(decrypted)
 
             await message.reply(content="Could you repeat that?", file=discord.File(decrypted_path))
+        except Exception as e:
+            print("Error decrypting image:", e)
         finally:
             if os.path.exists(decrypted_path):
                 os.remove(decrypted_path)
